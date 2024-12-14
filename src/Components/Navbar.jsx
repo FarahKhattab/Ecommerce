@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <nav>
       <div className="container">
-        <a href="#">BRANDS</a>
+        <a href="#" style={{ fontWeight: 'bold' }}>BRANDS</a>
         <div className="menu">
           <a href="#">Home</a>
           <div className="dropdown">

@@ -1,0 +1,8 @@
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* Creates 4 equal-width columns */
+    gap: 16px;
+    /* Adds space between the grid items */
+    padding: 20px;
+}

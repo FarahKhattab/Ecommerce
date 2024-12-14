@@ -1,0 +1,41 @@
+/* App.css */
+.app-container {
+    padding: 20px;
+    /* Add padding around the entire page */
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    /* height: 100vh; */
+    /* Full viewport height */
+}
+
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    /* To place filter on the left and products on the right */
+    margin-top: 20px;
+    /* Add some space below the navbar */
+}
+
+.filter-bar {
+    width: 200px;
+    /* Set a fixed width for the filter */
+    margin-right: 20px;
+    /* Add space between filter and products container */
+    height: auto;
+}
+.filter-container{
+        background-color: #f4f4f4;
+}
+.products-container {
+    flex-grow: 1;
+    /* Allow products container to take remaining space */
+    padding: 20px;
+    /* Add padding around products */
+    background-color: white;
+    /* White background for the products container */
+    border-radius: 8px;
+    /* Optional, adds rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Adds some shadow to products */
+}
