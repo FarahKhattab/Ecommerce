@@ -1,8 +1,10 @@
 // FilterBar.jsx
-import React, { useState } from 'react';
+import { useEffect, useState } from "react";
 import './FilterBar.css'; // Import the CSS file
 
-const FilterBar = () => {
+const FilterBar = ({ filterProp, onColorSelected, onBrandSelected, onPriceChange}) => {
+  const [colors, setColors] = useState([]);
+  const [brands, setBrands]  = useState([]);
   const [price, setPrice] = useState([0, 1000]);
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
@@ -10,6 +12,7 @@ const FilterBar = () => {
   const handlePriceChange = (e) => {
     const newPrice = [...price];
     newPrice[e.target.name === 'min' ? 0 : 1] = e.target.value;
+    console.log('new price:', newPrice);
     setPrice(newPrice);
   };
 
@@ -30,66 +33,26 @@ const FilterBar = () => {
   };
 
   const handleSubmit = () => {
+    onColorSelected(selectedColors);
+    onBrandSelected(selectedBrands);
+    onPriceChange(price);
     console.log('Price Range:', price);
     console.log('Selected Colors:', selectedColors);
     console.log('Selected Brands:', selectedBrands);
     };
-     const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const options = {
-    //             method: 'GET',
-    //             url: 'https://asos2.p.rapidapi.com/products/v2/list',
-    //             params: {
-    //                 store: 'US',
-    //                 offset: '0',
-    //                 categoryId: '4209',
-    //                 country: 'US',
-    //                 sort: 'freshness',
-    //                 currency: 'USD',
-    //                 sizeSchema: 'US',
-    //                 limit: '48',
-    //                 lang: 'en-US',
-    //             },
-    //             headers: {
-    //                 'x-rapidapi-key': 'faee72e900msh412cd07b017b061p1849f7jsnc14a9fcbb6e5',
-    //                 'x-rapidapi-host': 'asos2.p.rapidapi.com',
-    //             },
-    //         };
-
-    //         try {
-                
-    //             const response = await axios.request(options);
-    //              // Extract only the desired fields
-    //             const transformedProducts = response.data.products.map((product) => ({
-    //             name: product.name,
-    //             additionalImageUrls: product.additionalImageUrls,
-    //             colour: product.colour,
-    //             brandName: product.brandName,
-    //             imageUrl: 'https://'+product.imageUrl,
-    //             price: {
-    //                 current: product.price.current,
-    //                 previous: product.price.previous,
-    //             },
-    //         }));
-    //             setProducts(transformedProducts);
-    //         } catch (err) {
-    //             setError(err.message);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
-
-    //     fetchData();
-    // }, []);
-
-
-
-
-
+  useEffect(() => {
+    if (filterProp.colors.length > 0)
+    {
+      setColors(filterProp.colors)
+    }
+    if (filterProp.brands.length > 0)
+    {
+      setBrands(filterProp.brands)
+    }
+  console.log('filterProp:', filterProp);  
+}, [filterProp]);
+  
   return (
     <div className="filter-bar">
       <div className="filter-card">
@@ -110,31 +73,34 @@ const FilterBar = () => {
             onChange={handlePriceChange}
             max="10000"
           />
-        </div>
-        <button onClick={handleSubmit}>Filter</button>
-      </div>
+        
 
       <div className="filter-card">
         <h3>Filter By Color</h3>
         <div className="colors">
-          {['Blue', 'Green', 'Orange', 'Dark Blue'].map((color) => (
-            <label key={color}>
-              <input
-                type="checkbox"
-                checked={selectedColors.includes(color)}
-                onChange={() => handleColorChange(color)}
-              />
-              {color}
-            </label>
-          ))}
+
+          {colors.length > 0 && 
+            colors.map((color, index) => (
+              <label key={index}>
+                <input
+                  type="checkbox"
+                  checked={selectedColors.includes(color)}
+                  onChange={() => handleColorChange(color)}
+                />
+                {color}
+              </label>
+            ))
+          }
+          
         </div>
       </div>
 
       <div className="filter-card">
         <h3>Filter By Brand</h3>
         <div className="brands">
-          {['Nike', 'Asos', 'Timberland', 'Pull&Bear'].map((brand) => (
-            <label key={brand}>
+           {brands.length > 0 && 
+            brands.map((brand, index) => (
+            <label key={index}>
               <input
                 type="checkbox"
                 checked={selectedBrands.includes(brand)}
@@ -144,6 +110,9 @@ const FilterBar = () => {
             </label>
           ))}
         </div>
+      </div>
+      </div>
+        <button onClick={handleSubmit}>Filter</button>
       </div>
     </div>
   );
