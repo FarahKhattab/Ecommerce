@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./ProductCard.css";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, onAddToCart}) => {
   return (
     <div className="product-card">
       <div className="product-card-header">
@@ -28,7 +28,7 @@ const ProductCard = ({ product }) => {
                 style={{ backgroundColor: product.colour }}
             ></span> */}
         </div>
-        <button className="learn-more-btn">Add to cart</button>
+        <button onClick={() => onAddToCart(product)} className="Add-to-cart-btn">Add to cart</button>
       </div>
     </div>
   );

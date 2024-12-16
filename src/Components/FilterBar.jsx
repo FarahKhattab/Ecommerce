@@ -112,7 +112,7 @@ const FilterBar = ({ filterProp, onColorSelected, onBrandSelected, onPriceChange
         </div>
       </div>
       </div>
-        <button onClick={handleSubmit}>Filter</button>
+        <button className="filter-button" onClick={handleSubmit}>Filter</button>
       </div>
     </div>
   );

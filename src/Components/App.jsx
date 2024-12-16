@@ -19,9 +19,9 @@ const App = () => {
     const [searchInput, setSearchInput] = useState("");
     const [selectedColor, setSelectedColor] = useState([]);
     const [selectedBrand, setselectedBrand] = useState([]);
-
     const [price, setPrice] = useState([0, 1000]);
-    // const [maxPrice, setMaxPrice] = useState(0);
+    const [cart, setCart] = useState([]);
+    const [numProductsCart, setNumProductsCart] = useState(0);
 
 
 
@@ -40,12 +40,37 @@ const App = () => {
         setPrice(input);
     };
 
-    console.log('from App Selected Colors:', selectedColor);
-    console.log('from App Selected Brands:', selectedBrand);
-    console.log('from App Selected price:', price);
+    const handleAddToCart = (product) => {
+    setCart((prevCart) => {
+        // Check if the product already exists in the cart
+        const existingProduct = prevCart.find((item) => item.id === product.id);
+
+        if (existingProduct) {
+            // Increment the count for the existing product
+            return prevCart.map((item) =>
+                item.id === product.id
+                    ? { ...item, count: item.count + 1 }
+                    : item
+            );
+        } else {
+            // Add the product with a count of 1
+            return [...prevCart, { ...product, count: 1 }];
+        }
+    });
+        setNumProductsCart(numProductsCart + 1);
+};
 
 
-    const filteredProducts = products.filter(product => {
+
+
+
+    // console.log('from App Selected Colors:', selectedColor);
+    // console.log('from App Selected Brands:', selectedBrand);
+    // console.log('from App Selected price:', price);
+    console.log('from App products in cart:', cart);
+
+
+        const filteredProducts = products.filter(product => {
         const matchesSearch = product.name.toLowerCase().includes(searchInput.toLowerCase());
         const matchesColor = selectedColor.length > 0 ? selectedColor.includes(product.colour) : true;
         const matchesBrand = selectedBrand.length > 0 ? selectedBrand.includes(product.brandName) : true;
@@ -84,6 +109,7 @@ const App = () => {
                 const response = await axios.request(options);
                     // Extract only the desired fields
                 const transformedProducts = response.data.products.map((product) => ({
+                id: product.id,
                 name: product.name,
                 additionalImageUrls: product.additionalImageUrls,
                 colour: product.colour,
@@ -95,6 +121,8 @@ const App = () => {
                 },
             }));
                 setProducts(transformedProducts);
+
+                // console.log(response.data.products);
 
                     // Get unique colors and brands
                 const uniqueColors = [...new Set(response.data.products.map((product) => product.colour))];
@@ -125,9 +153,9 @@ const App = () => {
         fetchData();
     }, []);
     
-        useEffect(() => {
-        console.log('Products updated:', products);
-        }, [products]); 
+    //     useEffect(() => {
+    //     console.log('Products updated:', products);
+    //     }, [products]); 
     
     useEffect(() => {
         console.log('filteredProducts updated:', filteredProducts);
@@ -135,7 +163,7 @@ const App = () => {
     
     return (
         <div className="app-container">
-            <Navbar />
+            <Navbar cart={cart} numProductsCart={numProductsCart} />
             <div className="main-content">
                 <div className="filter-container">
                     <FilterBar filterProp={filterProp} onColorSelected={handleColorFilter}
@@ -143,7 +171,7 @@ const App = () => {
                 </div>
                 <div className="products-container">
                     <SearchBar onSearchChange={handleSearchChange}/>
-                    <ProductsContainer products={filteredProducts} loading={loading} error={error} />
+                    <ProductsContainer products={filteredProducts} loading={loading} error={error} onAddToCart={handleAddToCart} />
                 </div>
             </div>
         </div>

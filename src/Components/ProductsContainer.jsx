@@ -2,18 +2,20 @@ import ProductCard from './ProductCard';
 import PropTypes from "prop-types";
 import "./ProductsContainer.css";
 
-const ProductsContainer = ({ products, loading, error }) => {
+const ProductsContainer = ({ products, loading, error, onAddToCart}) => {
 
     if (loading) {
-        console.log(products.length);
         return <div>Loading...</div>;
+  }
+  if (error) {
+        return <div>Error...</div>;
     }
 
     return (
           <div>
             <div className="products-grid">
-                {products.map((product, index) => (
-                    <ProductCard key={index} product={product} />
+                {products.map((product) => (
+                    <ProductCard key={product.id} product={product} onAddToCart={onAddToCart} />
                 ))}
             </div>
         </div>

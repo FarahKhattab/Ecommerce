@@ -1,0 +1,127 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+
+.cart-summary-modal {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.close-btn {
+    position: absolute;
+    top: 8px; /* Adjust the distance from the top edge */
+    right: 8px; /* Adjust the distance from the right edge */
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+    color: #333; /* Button text color */
+}
+.close-btn:focus {
+    outline: none;
+    /* Removes the blue outline when focused */
+}
+
+.close-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    /* Optional: Add a subtle hover effect */
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 12px;
+}
+
+.item-image {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-right: 12px;
+}
+
+.item-details {
+    flex: 1;
+}
+
+.item-name {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.item-brand,
+.item-price {
+    font-size: 12px;
+    color: #777;
+    margin: 2px 0;
+}
+
+.item-quantity {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-text {
+    padding: 10px;
+}
+
+.quantity-btn {
+    background-color: #ddd;
+    border: none;
+    padding: 6px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.quantity-btn:hover {
+    background-color: #ccc;
+}
+
+.summary-details {
+    margin-top: 12px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.total {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.total-price {
+    color: black;
+    font-weight: bold;
+}
