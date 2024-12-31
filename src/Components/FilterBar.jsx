@@ -1,6 +1,6 @@
 // FilterBar.jsx
 import { useEffect, useState } from "react";
-import './FilterBar.css'; // Import the CSS file
+import './FilterBar.css'; 
 
 const FilterBar = ({ filterProp, onColorSelected, onBrandSelected, onPriceChange}) => {
   const [colors, setColors] = useState([]);

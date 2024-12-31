@@ -25,23 +25,21 @@
 
 .close-btn {
     position: absolute;
-    top: 8px; /* Adjust the distance from the top edge */
-    right: 8px; /* Adjust the distance from the right edge */
+    top: 8px; 
+    right: 8px; 
     background: transparent;
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
     line-height: 1;
-    color: #333; /* Button text color */
+    color: #333; 
 }
 .close-btn:focus {
     outline: none;
-    /* Removes the blue outline when focused */
 }
 
 .close-btn:hover {
     background-color: rgba(0, 0, 0, 0.1);
-    /* Optional: Add a subtle hover effect */
 }
 
 .title {

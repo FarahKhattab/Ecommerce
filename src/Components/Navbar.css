@@ -1,4 +1,3 @@
-/* Navbar.css */
 nav {
     background-color: #ededed;
     color: black;
@@ -24,7 +23,6 @@ nav {
 
 .container a:hover {
     color: #3b82f6;
-    /* Tailwind's blue-500 color */
 }
 
 .menu {

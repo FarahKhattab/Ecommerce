@@ -22,12 +22,6 @@ const ProductCard = ({ product, onAddToCart}) => {
           )}
           <span className="discounted-price">{product.price.current.text}</span>
         </div>
-        <div className="color-options">
-            {/* <span
-                className="color"
-                style={{ backgroundColor: product.colour }}
-            ></span> */}
-        </div>
         <button onClick={() => onAddToCart(product)} className="Add-to-cart-btn">Add to cart</button>
       </div>
     </div>
